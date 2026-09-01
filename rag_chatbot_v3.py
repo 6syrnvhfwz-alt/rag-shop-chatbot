@@ -18,10 +18,12 @@
 运行：python rag_chatbot_v3.py
 """
 
+import os
 import requests
 import chromadb
 
-OLLAMA_URL = "http://localhost:11434"
+# 本地运行默认连本机 Ollama；Docker 里通过环境变量改成 host.docker.internal
+OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
 MODEL = "qwen3:8b"
 EMBED_MODEL = "nomic-embed-text"
 
