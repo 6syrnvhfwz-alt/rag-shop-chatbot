@@ -17,6 +17,7 @@
 """
 
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import uvicorn
 
@@ -71,6 +72,11 @@ def chat(req: ChatRequest):
         search_question=search_question,
         sources=context.split("\n\n")
     )
+
+
+# ===== 静态文件托管：浏览器访问 http://127.0.0.1:8000 直接进聊天网页 =====
+# 放在最后，避免截获上面的 /chat 路由
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 
 if __name__ == "__main__":
